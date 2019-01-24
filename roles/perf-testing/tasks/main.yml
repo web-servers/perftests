@@ -1,4 +1,24 @@
 ---
 # tasks file for perf-testing
-- include_tasks: windows-jws.yml
-#- include_tasks: jmeter.yml
+
+- name: Include Windows-specific variables
+  include_vars: vars/win_jws.yml
+  when: '"Windows" in ansible_distribution'
+
+# - name: install nssm
+#   win_chocolatey: name=nssm
+
+#
+# # - name: debug
+# #   debug:
+# #      var: jws_unzip_path
+#
+- name: Execute Windows-specific JWS installation instructions
+  include_tasks: windows-jws-install.yml
+  when:
+    - '"Windows" in ansible_distribution'
+    - inventory_hostname in groups['jws']
+#
+# - name: Execute JMeter installation instructions
+#   include_tasks: jmeter.yml
+#   when: inventory_hostname in groups['jmeter']

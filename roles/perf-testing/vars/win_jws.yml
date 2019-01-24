@@ -1,0 +1,3 @@
+---
+# Windows-specific JWS varfile
+jws_unzip_path: "C:/tmp"

@@ -1,3 +1,20 @@
 ---
 # tasks file for deploying JMeter. Note that this is Linux-only
-#- name: 
+
+- name: "Ensure {{ jmeter_unzip_path }} exists"
+  file:
+    path: "{{ jmeter_unzip_path }}"
+    state: "directory"
+
+- name: "Deploy base JMeter"
+  unarchive:
+    remote_src: yes
+    src: "{{ jmeter_url }}"
+    dest: "{{ jmeter_unzip_path }}"
+
+- name: "Deploy JMeter plugins"
+  unarchive:
+    remote_src: yes
+    src: "{{ item }}"
+    dest: "{{ jmeter_unzip_path }}/{{ jmeter_url | basename | splitext | first }}"
+  with_items: "{{ jmeter_plugin_urls }}"
