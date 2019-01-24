@@ -6,9 +6,9 @@ TODO
 Requirements
 ------------
 
-. Enable [WinRM](https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1).
-. Install pywinrm: `pip install --upgrade --user setuptools && pip install pywinrm`
-. setup variables:
+1. Enable [WinRM](https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1).
+1. Install pywinrm: `pip install --upgrade --user setuptools && pip install pywinrm`
+1. setup variables:
 
 ```[jws:vars]
 ansible_user=$user
