@@ -1,0 +1,17 @@
+---
+# vars file for perf-testing
+jws_urls:
+  - "{{ lookup('env','URL_BASE') }}/5.0.0/jws-5.0.0-application-server.zip"
+  - "{{ lookup('env','URL_BASE') }}/5.0.0/jws-5.0.0-application-server-win6.x86_64.zip"
+  - "{{ lookup('env','URL_BASE') }}/5.0.1/jws-5.0.1-application-server.zip"
+  - "{{ jws_agent_url }}"
+
+jws_agent_url: "https://github.com/undera/perfmon-agent/releases/download/2.2.3/ServerAgent-2.2.3.zip"
+
+jws_unzip_path: "C:/tmp"
+
+jmeter_unzip_path: "/tmp/jmeter"
+jmeter_url: "https://www-us.apache.org/dist//jmeter/binaries/apache-jmeter-5.0.zip"
+jmeter_plugin_urls:
+  - "https://jmeter-plugins.org/files/packages/jpgc-perfmon-2.1.zip"
+  - "https://jmeter-plugins.org/files/packages/jpgc-cmd-2.2.zip"

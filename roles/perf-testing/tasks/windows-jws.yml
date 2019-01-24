@@ -1,0 +1,33 @@
+---
+# windows-specific tasks file for perf-testing
+- name: "Ensure {{ jws_unzip_path }} exists"
+  win_file:
+    path: "{{ jws_unzip_path }}"
+    state: directory
+
+- name: "Download JWS zips"
+  win_get_url:
+    dest: "{{ jws_unzip_path }}"
+    url: "{{ item }}"
+  with_items: "{{ jws_urls }}"
+
+- name: "Unzip all zips"
+  win_unzip:
+    src: "{{ jws_unzip_path }}/{{ item | basename }}"
+    dest: "{{ jws_unzip_path }}"
+  with_items: "{{ jws_urls }}"
+
+- name: "Copy certs to JWS"
+  win_copy:
+    src: ssl
+    dest: "{{ jws_unzip_path }}"
+
+- name: "Template server.xml"
+  win_template:
+    dest: "{{ jws_unzip_path }}/jws-5.0/tomcat/conf/server.xml"
+    src: jsse.xml
+
+- name: "Start perfmon ServerAgent"
+  win_command: "{{ jws_unzip_path }}/{{ jws_agent_url | basename | splitext | first }}/startAgent.bat"
+  async: 1
+  poll: 0

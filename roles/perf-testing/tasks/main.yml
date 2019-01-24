@@ -1,0 +1,4 @@
+---
+# tasks file for perf-testing
+- include_tasks: windows-jws.yml
+#- include_tasks: jmeter.yml
