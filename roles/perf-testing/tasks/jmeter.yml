@@ -18,3 +18,8 @@
     src: "{{ item }}"
     dest: "{{ jmeter_unzip_path }}/{{ jmeter_url | basename | splitext | first }}"
   with_items: "{{ jmeter_plugin_urls }}"
+
+- name: "Deploy testplan"
+  template:
+    src: testplan.jmx
+    dest: "{{ jmeter_unzip_path }}"

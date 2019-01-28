@@ -1,7 +1,7 @@
 - name: Execute the JWS role
   remote_user: hudson
   become: false
-  hosts: jws
+  hosts: all
 
   roles:
     - perf-testing

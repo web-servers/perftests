@@ -8,6 +8,7 @@ jws_urls:
   - "{{ lookup('env','URL_BASE') }}/5.0.1/jws-5.0.1-application-server.zip"
   - "{{ jws_agent_url }}"
 jws_agent_url: "https://github.com/undera/perfmon-agent/releases/download/2.2.3/ServerAgent-2.2.3.zip"
+jws_agent_dir_name: "{{ jws_agent_url | basename | splitext | first }}"
 
 # JMeter vars
 jmeter_unzip_path: "/tmp/jmeter"
@@ -15,3 +16,6 @@ jmeter_url: "https://www-us.apache.org/dist/jmeter/binaries/apache-jmeter-5.0.zi
 jmeter_plugin_urls:
   - "https://jmeter-plugins.org/files/packages/jpgc-perfmon-2.1.zip"
   - "https://jmeter-plugins.org/files/packages/jpgc-cmd-2.2.zip"
+
+# IP address which we want to stress test
+jmeter_target_ip: "{{ lookup('env','JMETER_TARGET') }}"

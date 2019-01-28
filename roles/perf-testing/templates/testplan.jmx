@@ -29,7 +29,7 @@
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">${__P(host,localhost)}</stringProp>
+          <stringProp name="HTTPSampler.domain">{{ jmeter_target_ip }}</stringProp>
           <stringProp name="HTTPSampler.port">${__P(port,9443)}</stringProp>
           <stringProp name="HTTPSampler.protocol">${__P(protocol,https)}</stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
@@ -108,14 +108,14 @@
         <boolProp name="exclude_checkbox_state">false</boolProp>
         <collectionProp name="metricConnections">
           <collectionProp name="-1982582657">
-            <stringProp name="751461992">${__P(perfmonHost,localhost)}</stringProp>
-            <stringProp name="1715960">${__P(perfmonPort,8000)}</stringProp>
+            <stringProp name="751461992">{{ jmeter_target_ip }}</stringProp>
+            <stringProp name="1715960">8000</stringProp>
             <stringProp name="66952">CPU</stringProp>
             <stringProp name="-608459489">label=CPU</stringProp>
           </collectionProp>
           <collectionProp name="279084281">
-            <stringProp name="751461992">${__P(perfmonHost,localhost)}</stringProp>
-            <stringProp name="1715960">${__P(perfmonPort,8000)}</stringProp>
+            <stringProp name="751461992">{{ jmeter_target_ip }}</stringProp>
+            <stringProp name="1715960">8000</stringProp>
             <stringProp name="-1993889503">Memory</stringProp>
             <stringProp name="0"></stringProp>
           </collectionProp>
