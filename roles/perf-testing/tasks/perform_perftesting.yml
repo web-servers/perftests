@@ -1,0 +1,44 @@
+---
+# Execute JMeter test and collect results
+- name: "Ensure {{ jmeter_out_dir }} exists"
+  file:
+    path: "{{ jmeter_out_dir }}"
+    state: directory
+
+- name: Start JMeter
+  command: >
+     {{ jmeter_root_dir_path }}/bin/jmeter -n
+     -t {{ jmeter_unzip_path }}/testplan.jmx
+     -l jmeter_results.csv -e -o results
+  args:
+    chdir: "{{ jmeter_out_dir }}"
+  register: jmeter_perftest
+  async: 1000
+  poll: 0
+
+- name: Wait for JMeter test to finish
+  async_status:
+    jid: "{{ jmeter_perftest.ansible_job_id }}"
+  register: job_result
+  until: job_result.finished
+  retries: 40
+
+- name: "Generate graphs"
+  command: >
+    {{ jmeter_root_dir_path }}/bin/JMeterPluginsCMD.sh
+    --generate-png perfmon.png
+    --input-jtl perfmon_srv.csv
+    --plugin-type PerfMon --width 1024 --height 768
+  args:
+    chdir: "{{ jmeter_out_dir }}"
+
+- name: "Archive results"
+  archive:
+    path: "{{ jmeter_out_dir }}"
+    dest: "{{ jmeter_unzip_path }}/results.zip"
+    format: zip
+
+- name: "Fetch results"
+  fetch:
+    src: "{{ jmeter_unzip_path }}/results.zip"
+    dest: "./results.zip"

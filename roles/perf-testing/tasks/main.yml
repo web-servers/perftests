@@ -14,3 +14,7 @@
 - name: Execute JMeter installation instructions
   include_tasks: jmeter.yml
   when: inventory_hostname in groups['jmeter']
+
+- name: Start JMeter
+  include_tasks: perform_perftesting.yml
+  when: inventory_hostname in groups['jmeter']

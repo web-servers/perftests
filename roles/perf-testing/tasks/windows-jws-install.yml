@@ -31,7 +31,7 @@
 - name: "Copy startAgent.bat into perfmon server agent"
   win_copy:
     src: startAgent.bat
-    dest: "{{ jws_unzip_path }}/{{ jws_agent_dir_name }}"
+    dest: "{{ jws_unzip_path }}/{{ jws_agent_dir_name }}/startAgent.bat"
 
 - name: "Start perfmon ServerAgent in {{ jws_unzip_path }}/{{ jws_agent_url | basename | splitext | first }}"
   win_command: "startAgent.bat --tcp-port 8000 --udp-port 8000"

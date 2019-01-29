@@ -17,5 +17,8 @@ jmeter_plugin_urls:
   - "https://jmeter-plugins.org/files/packages/jpgc-perfmon-2.1.zip"
   - "https://jmeter-plugins.org/files/packages/jpgc-cmd-2.2.zip"
 
+jmeter_dir_name: "{{ jmeter_url | basename | splitext | first }}"
+jmeter_root_dir_path: "{{ jmeter_unzip_path }}/{{ jmeter_dir_name }}"
+jmeter_out_dir: "{{ jmeter_unzip_path }}/out"
 # IP address which we want to stress test
 jmeter_target_ip: "{{ lookup('env','JMETER_TARGET') }}"
