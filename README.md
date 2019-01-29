@@ -102,6 +102,17 @@ The role expects the following variables to be exported:
 - `JMETER_TARGET` - the IP address of the JWS server accessible from the JMeter server.
 This IP address will be used for performance testing.
 
+## Executing the test
+
+Before executing the tests, verify that:
+
+1. You have exported necessary variables
+1. You have configured your inventory file, your servers, and Ansible can ping them
+1. If your JWS server is Windows, you have ensured Java is on local storage
+
+To execute the test, issue:
+
+`ansible-playbook execute-role.yml`
 
 ## Author Information
 
