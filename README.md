@@ -17,10 +17,11 @@ ansible 2.7.5
   python version = 2.7.5 (default, Sep 12 2018, 05:31:16) [GCC 4.8.5 20150623 (Red Hat 4.8.5-36)]
 ```
 
-On the JWS server, if it is a Windows server:
+Additionally, install pywinrm if your JWS server is a Windows server:
 
-1. Enable [WinRM](https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1).
-1. Install pywinrm: `sudo pip install --upgrade --user setuptools && sudo pip install pywinrm`
+`sudo pip install --upgrade --user setuptools && sudo pip install pywinrm`
+
+On the JWS server, if it is a Windows server, Enable [WinRM](https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1).
 
 ## Inventory file
 
@@ -65,6 +66,32 @@ $ ansible jmeter -m ping
     "changed": false,
     "ping": "pong"
 }
+```
+
+Note that the role expects the groups to be named `jws` and `jmeter`.
+
+## Limitations
+
+### Java Home cannot be on an NFS on Windows
+_Problem_: For the Windows platform, if you execute `win_command: java -version` and
+your `%path%` contains java binary that is on an NFS, you will receive an error.
+
+_Solution_: To work around the issue:
+
+1. Move Java on local storage
+1. Set global path so that it contains the local Java path:
+
+`setx path "C:\Users\hudson.MY-WIN2016-MACH\Desktop\jdk1.8.0_last\bin;%path%"`
+
+_Verification_: Before you start testing, you can verify that Ansible is able
+to execute Java with the following:
+
+```
+$ ansible jws -m win_command -a "java -version"
+10.0.0.1 | CHANGED | rc=0 >>
+java version "1.8.0_191"
+Java(TM) SE Runtime Environment (build 1.8.0_191-b12)
+Java HotSpot(TM) 64-Bit Server VM (build 25.191-b12, mixed mode)
 ```
 
 ## Role Variables
