@@ -68,7 +68,6 @@ $ ansible jmeter -m ping
 ```
 
 ## Role Variables
---------------
 
 The role expects the following variables to be exported:
 
@@ -78,6 +77,5 @@ This IP address will be used for performance testing.
 
 
 ## Author Information
-------------------
 
 Marek Czernek <mczernek at redhat dot com> for Red Hat.
