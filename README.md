@@ -101,6 +101,9 @@ The role expects the following variables to be exported:
 - `URL_BASE` - the URL base from where you download the JWS.
 - `JMETER_TARGET` - the IP address of the JWS server accessible from the JMeter server.
 This IP address will be used for performance testing.
+- `SSL_CONF` - the name of configuration file that is to be used by JWS. It has to
+be present in the `templates` dir. At this moment, it can have values: `apr` or `jsse`.
+The `.xml` is added in the task itself. If not specified, `jsse` is used.
 
 ## Executing the test
 

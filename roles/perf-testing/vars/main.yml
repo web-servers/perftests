@@ -9,6 +9,9 @@ jws_urls:
   - "{{ jws_agent_url }}"
 jws_agent_url: "https://github.com/undera/perfmon-agent/releases/download/2.2.3/ServerAgent-2.2.3.zip"
 jws_agent_dir_name: "{{ jws_agent_url | basename | splitext | first }}"
+# The ssl conf that is used; this should correspond to a template xml file
+# That means it can be apr, or jsse (since apr.xml and jsse.xml are in templates)
+jws_ssl_conf: "{{ lookup('env','SSL_CONF') or jsse }}"
 
 # JMeter vars
 jmeter_unzip_path: "/tmp/jmeter"

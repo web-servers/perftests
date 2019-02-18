@@ -41,4 +41,4 @@
 - name: "Fetch results"
   fetch:
     src: "{{ jmeter_unzip_path }}/results.zip"
-    dest: "./results.zip"
+    dest: "."

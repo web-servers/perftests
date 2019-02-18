@@ -25,7 +25,7 @@
 - name: "Template server.xml"
   win_template:
     dest: "{{ jws_unzip_path }}/jws-5.0/tomcat/conf/server.xml"
-    src: jsse.xml
+    src: "{{ jws_ssl_conf }}.xml"
 
 # This is a workaround; we have to add a windows newline into the startagent script
 - name: "Copy startAgent.bat into perfmon server agent"
