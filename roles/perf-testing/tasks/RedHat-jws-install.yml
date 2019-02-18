@@ -1,0 +1,37 @@
+---
+# Linux-specific tasks file for perf-testing
+- name: "Ensure {{ jws_unzip_path }} exists"
+  file:
+    path: "{{ jws_unzip_path }}"
+    state: directory
+
+- name: "Download and unzip JWS"
+  unarchive:
+    remote_src: yes
+    src: "{{ item }}"
+    dest: "{{ jws_unzip_path }}"
+  with_items: "{{ jws_urls }}"
+
+- name: "Copy certs to JWS"
+  copy:
+    src: ssl
+    dest: "{{ jws_unzip_path }}"
+
+- name: "Template server.xml"
+  template:
+    dest: "{{ jws_unzip_path }}/jws-5.0/tomcat/conf/server.xml"
+    src: "{{ jws_ssl_conf }}.xml"
+
+- name: "Start perfmon ServerAgent in {{ jws_unzip_path }}/{{ jws_agent_url | basename | splitext | first }}"
+  shell: "./startAgent.sh --tcp-port 8000 --udp-port 8000 >/dev/null 2>&1 &"
+  args:
+    chdir: "{{ jws_unzip_path }}/{{ jws_agent_dir_name }}"
+  async: 1
+  poll: 0
+
+- name: "Start JWS Server"
+  command: "./startup.sh"
+  args:
+    chdir: "{{ jws_unzip_path }}/jws-5.0/tomcat/bin/"
+  async: 1
+  poll: 0
