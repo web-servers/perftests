@@ -105,6 +105,14 @@ This IP address will be used for performance testing.
 be present in the `templates` dir. At this moment, it can have values: `apr` or `jsse`.
 The `.xml` is added in the task itself. If not specified, `jsse` is used.
 
+Before executing the scripts, be sure to export the variables:
+
+```
+export URL_BASE="https://myhost.com/released/jboss/webserver"
+export JMETER_TARGET=10.0.0.1
+export SSL_CONF=apr
+```
+
 ## Executing the test
 
 Before executing the tests, verify that:
