@@ -4,7 +4,7 @@
 # JWS platform-independent vars
 jws_urls:
   - "{{ lookup('env','URL_BASE') }}/5.0.0/jws-5.0.0-application-server.zip"
-  - "{{ lookup('env','URL_BASE') }}/5.0.0/jws-5.0.0-application-server-RHEL7-x86_64.zip"
+  - "{{ jws_native_url }}"
   - "{{ lookup('env','URL_BASE') }}/5.0.1/jws-5.0.1-application-server.zip"
   - "{{ jws_agent_url }}"
 jws_agent_url: "https://github.com/undera/perfmon-agent/releases/download/2.2.3/ServerAgent-2.2.3.zip"

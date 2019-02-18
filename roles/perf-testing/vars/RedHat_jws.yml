@@ -1,3 +1,5 @@
 ---
 # RHEL-specific JWS varfile
 jws_unzip_path: "/tmp"
+# Natives for RHEL
+jws_native_url: "{{ lookup('env','URL_BASE') }}/5.0.0/jws-5.0.0-application-server-RHEL7-x86_64.zip"

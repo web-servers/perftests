@@ -1,3 +1,5 @@
 ---
 # Windows-specific JWS varfile
 jws_unzip_path: "C:/tmp"
+# Natives for Windows
+jws_native_url: "{{ lookup('env','URL_BASE') }}/5.0.0/jws-5.0.0-application-server-win6.x86_64.zip"
